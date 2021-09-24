@@ -1,0 +1,34 @@
+<?php 
+
+    include_once('database/function.php');
+
+    $emailnamecheck = new DB_con();
+
+    // Getting post value
+    $emailregiscom = $_POST['emailregiscom'];
+
+    $sql = $emailnamecheck->checkregister($emailregiscom);
+    $num1 = mysqli_num_rows($sql);
+
+    $sql2 = $emailnamecheck->checkregister2($emailregiscom);
+    $num2 = mysqli_num_rows($sql2);
+
+    if ($emailregiscom == "") {
+        echo "<span style='color: red;'>กรุณากรอกอีเมล.</span>";
+        echo "<script>$('#regis').prop('disabled', true);</script>";
+    }elseif ($num1 > 0) {
+        echo "<span style='color: red;'>อีเมลนี้มีผู้ใช้แล้ว.</span>";
+        echo "<script>$('#regis').prop('disabled', true);</script>";
+        
+    }elseif ($num2 > 0) {
+        echo "<span style='color: red;'>อีเมลนี้มีผู้ใช้แล้ว.</span>";
+        echo "<script>$('#regis').prop('disabled', true);</script>";
+        
+    }else {
+        echo "<span style='color: green;'></span>";
+        //echo "<span style='color: green;'>สามารถใช้อีเมลนี้ได้.</span>";
+        //echo "<script>$('#regis').prop('disabled', false);</script>";
+        
+    }
+
+?>
